@@ -1,0 +1,41 @@
+<h3>PAGINATION</h3>
+<table border="1" width="100%">
+<tr><th>Id</th><th>Name</th><th>Price</th><th>Date</th></tr>
+<tr th:each="item : ${page.content}">
+    <td th:text="${item.id}"></td>
+    <td th:text="${item.name}"></td>
+    <td th:text="${item.price}"></td>
+    <td th:text="${item.createDate}"></td>
+</tr>
+</table>
+
+<div>
+    <!-- First -->
+    <a th:if="${page.number > 0}"
+       th:href="@{|/product/page?p=0|}">First</a>
+    <span th:if="${page.number == 0}" style="color: gray;">First</span>
+
+    <!-- Previous -->
+    <a th:if="${page.number > 0}"
+       th:href="@{|/product/page?p=${page.number - 1}|}">Previous</a>
+    <span th:if="${page.number == 0}" style="color: gray;">Previous</span>
+
+    <!-- Next -->
+    <a th:if="${page.number + 1 < page.totalPages}"
+       th:href="@{|/product/page?p=${page.number + 1}|}">Next</a>
+    <span th:if="${page.number + 1 >= page.totalPages}" style="color: gray;">Next</span>
+
+    <!-- Last -->
+    <a th:if="${page.number + 1 < page.totalPages}"
+       th:href="@{|/product/page?p=${page.totalPages - 1}|}">Last</a>
+    <span th:if="${page.number + 1 >= page.totalPages}" style="color: gray;">Last</span>
+</div>
+
+
+<ul>
+    <li>Số thực thể hiện tại: [[${page.numberOfElements}]]</li>
+    <li>Trang số: [[${page.number}]]</li>
+    <li>Kích thước trang: [[${page.size}]]</li>
+    <li>Tổng số thực thể: [[${page.totalElements}]]</li>
+    <li>Tổng số trang: [[${page.totalPages}]]</li>
+</ul>

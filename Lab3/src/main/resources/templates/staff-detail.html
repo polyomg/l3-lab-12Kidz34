@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Staff Detail</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        div { width: 300px; border: 1px solid #ccc; padding: 15px; border-radius: 10px; }
+        img { width: 150px; border-radius: 10px; display: block; margin: 0 auto; }
+        hr { margin: 8px 0; }
+    </style>
+</head>
+<body>
+<div>
+    <!-- Hiển thị hình -->
+    <img th:src="@{|/photos/${staff.photo}|}" alt="Photo"><hr>
+
+    Email:
+    <b th:text="${staff.id}"></b><hr>
+
+    Họ và tên:
+    <b th:text="${#strings.capitalizeWords(staff.fullname)}"></b><hr>
+
+    Giới tính:
+    <b th:text="${staff.gender ? 'Nam' : 'Nữ'}"></b><hr>
+
+    Ngày sinh:
+    <b th:text="${#dates.format(staff.birthday, 'dd-MM-yyyy')}"></b><hr>
+
+    Cấp bậc:
+    <th:block th:switch="${staff.level}">
+        <b th:case="0">Úy</b>
+        <b th:case="1">Tá</b>
+        <b th:case="2">Tướng</b>
+        <b th:case="*">Chưa có</b>
+    </th:block><hr>
+
+    Salary:
+    $<b th:text="${#numbers.formatDecimal(staff.salary, 0, 'COMMA', 2, 'POINT')}"></b><hr>
+</div>
+</body>
+</html>

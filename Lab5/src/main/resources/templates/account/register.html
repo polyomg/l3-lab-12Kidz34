@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng ký tài khoản</title>
+</head>
+<body>
+
+<h2>Form Đăng Ký</h2>
+
+<form th:action="@{/register}" method="post" enctype="multipart/form-data">
+
+    <label>Tên đăng nhập:</label><br>
+    <input name="username" type="text" th:value="${username}" required><br><br>
+
+    <label>Mật khẩu:</label><br>
+    <input name="password" type="password" required><br><br>
+
+    <label>Họ tên:</label><br>
+    <input name="fullname" type="text"><br><br>
+
+    <label>Email:</label><br>
+    <input name="email" type="email"><br><br>
+
+    <label>Ảnh đại diện:</label><br>
+    <input name="photo_file" type="file"><br><br>
+
+    <button type="submit">Đăng ký</button>
+</form>
+
+<p>Bạn đã có tài khoản? <a th:href="@{/account/login}">Đăng nhập</a></p>
+
+<!-- Kết quả đăng ký -->
+<div th:if="${user}">
+    <hr>
+    <h3 th:text="${message}"></h3>
+    <p><b>Username:</b> <span th:text="${user.username}"></span></p>
+    <p><b>Fullname:</b> <span th:text="${user.fullname}"></span></p>
+    <p><b>Email:</b> <span th:text="${user.email}"></span></p>
+    <p><b>Ảnh đại diện:</b></p>
+    <img th:src="@{'/uploads/' + ${user.photo}}" width="150"><br><br>
+    <a th:href="@{/account/login}">
+        <button>Đăng nhập ngay</button>
+    </a>
+</div>
+
+</body>
+</html>
